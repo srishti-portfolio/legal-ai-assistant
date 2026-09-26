@@ -146,6 +146,7 @@ The **You** tab has two separate forms, deliberately split by sensitivity:
 
 ```
 legal-ai-assistant/
+├── .github/workflows/ CI: typecheck + lint + test + build on every push/PR
 ├── backend/           Express + TypeScript API
 │   ├── src/
 │   │   ├── config/    env loading
@@ -237,16 +238,43 @@ The live demo linked at the top runs on:
 ## Testing
 
 ```bash
-cd backend && npm test      # 41 tests: validators (incl. credential-change rules), JWT,
-                             # password hashing, chunking, RAG guardrails (mocked), auth/route security
-cd frontend && npm test     # component tests: UI primitives, document list, chat thread,
+cd backend && npm test      # 52 tests: validators (incl. credential-change rules), JWT,
+                             # password hashing, chunking, document extraction (PDF/DOCX/OCR
+                             # dispatch), OCR response handling, the full ingest pipeline
+                             # (success + every failure branch), RAG guardrails, auth/route security
+cd frontend && npm test     # component tests: UI primitives (incl. password show/hide),
+                             # document upload, document list, chat composer, chat thread,
                              # auth context, language/i18n context (all with mocked APIs)
 ```
 
-Backend tests mock the database and Gemini layers so `npm test` runs standalone without a
-live Postgres instance or a real API key — useful for CI. `npm run typecheck` and `npm run
-lint` are available in both projects and are clean (zero errors, zero `npm audit`
-vulnerabilities in both projects as of this writing).
+Backend tests mock the database, Gemini, Cloud Vision, and filesystem layers so `npm test`
+runs standalone without a live Postgres instance, a real API key, or real files — useful for
+CI. `npm run typecheck` and `npm run lint` are available in both projects and are clean (zero
+errors, zero `npm audit` vulnerabilities in both projects as of this writing).
+
+**Continuous integration**: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs
+typecheck, lint, test, and build for both projects on every push and pull request to `main` —
+the test suite isn't just present, it's enforced.
+
+---
+
+## Efficiency
+
+- **Response compression**: `compression` middleware gzips every JSON response — the biggest
+  win on the `history` and `chat` endpoints, which return the most text.
+- **Route-level code splitting**: the frontend only ships the JS for `Login` and `Home` (the
+  two pages nearly every visit needs) in the initial bundle; `Register`, `History`, `You`, and
+  the 404 page load on demand via `React.lazy`.
+- **Batched embeddings**: document chunks are embedded via Gemini's `batchEmbedContents` in
+  batches of up to 100, not one request per chunk.
+- **No redundant LLM calls**: the retrieval-confidence gate in `rag.ts` skips calling the
+  generation model entirely when nothing in the document is relevant, rather than spending a
+  call to get an answer it then discards.
+- **Indexed queries**: `pgvector`'s `ivfflat` index on the embedding column for similarity
+  search, plus b-tree indexes on every foreign key used in a `WHERE` clause
+  (`document_id`, `user_id`) — see `backend/src/db/migrations/001_init.sql`.
+- **Connection pooling**: a single shared `pg.Pool` (not a new client per request) for the
+  whole backend process.
 
 ---
 
