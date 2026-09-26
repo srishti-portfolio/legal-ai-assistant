@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eef4fa;
+  --color-brand-100: #d3e4f2;
+  --color-brand-500: #1e3a5f;
+  --color-brand-600: #17304e;
+  --color-brand-700: #11253c;
+  --color-accent-400: #f4c542;
+  --color-accent-500: #e0af26;
+}
+
+@layer base {
+  :where(html) {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+  }
+
+  /* A visible focus ring everywhere keyboard users go — never suppressed with outline:none. */
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-brand-500;
+  }
+}
+
+@layer utilities {
+  .sr-only-focusable:not(:focus) {
+    @apply sr-only;
+  }
+}
