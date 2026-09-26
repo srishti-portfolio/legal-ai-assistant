@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { Alert, Button, TextField } from "./ui.js";
+import { Alert, Button, PasswordField, TextField } from "./ui.js";
 
 describe("Button", () => {
   it("fires onClick when clicked", async () => {
@@ -34,6 +34,31 @@ describe("TextField", () => {
     const input = screen.getByLabelText("Password");
     expect(input).toHaveAttribute("aria-invalid", "true");
     expect(screen.getByRole("alert")).toHaveTextContent("Too short");
+  });
+});
+
+describe("PasswordField", () => {
+  it("masks the value by default", () => {
+    render(<PasswordField label="Password" value="secret123" onChange={() => {}} />);
+    expect(screen.getByLabelText("Password")).toHaveAttribute("type", "password");
+  });
+
+  it("reveals the value when the toggle is clicked, and re-masks on a second click", async () => {
+    render(<PasswordField label="Password" value="secret123" onChange={() => {}} />);
+
+    const toggle = screen.getByRole("button", { name: "Show password" });
+    await userEvent.click(toggle);
+
+    expect(screen.getByLabelText("Password")).toHaveAttribute("type", "text");
+    expect(screen.getByRole("button", { name: "Hide password" })).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "Hide password" }));
+    expect(screen.getByLabelText("Password")).toHaveAttribute("type", "password");
+  });
+
+  it("uses a type=button toggle so it never submits the surrounding form", () => {
+    render(<PasswordField label="Password" value="secret123" onChange={() => {}} />);
+    expect(screen.getByRole("button", { name: "Show password" })).toHaveAttribute("type", "button");
   });
 });
 

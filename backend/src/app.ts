@@ -1,3 +1,4 @@
+import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { type Express } from "express";
@@ -19,6 +20,7 @@ export function createApp(): Express {
   app.set("trust proxy", env.nodeEnv === "production" ? 1 : false);
 
   app.use(helmet());
+  app.use(compression()); // gzip JSON responses — cheap win on the chat/history payloads
   app.use(
     cors({
       origin: env.corsOrigin,
