@@ -83,6 +83,15 @@ export interface Translations {
   saving: string;
   profileUpdated: string;
   profileUpdateError: string;
+  changeEmailPasswordHeading: string;
+  currentPasswordLabel: string;
+  newPasswordLabel: string;
+  newPasswordHint: string;
+  confirmNewPasswordLabel: string;
+  passwordsDontMatch: string;
+  updateCredentials: string;
+  updatingCredentials: string;
+  credentialsUpdated: string;
 
   notFoundTitle: string;
   notFoundSubtitle: string;
@@ -161,6 +170,15 @@ export const translations: Record<LanguageCode, Translations> = {
     saving: "Saving...",
     profileUpdated: "Profile updated.",
     profileUpdateError: "Could not save your changes. Please try again.",
+    changeEmailPasswordHeading: "Email & password",
+    currentPasswordLabel: "Current password",
+    newPasswordLabel: "New password",
+    newPasswordHint: "Leave blank to keep your current password.",
+    confirmNewPasswordLabel: "Confirm new password",
+    passwordsDontMatch: "Passwords don't match.",
+    updateCredentials: "Update email & password",
+    updatingCredentials: "Updating...",
+    credentialsUpdated: "Email and password updated.",
 
     notFoundTitle: "Page not found",
     notFoundSubtitle: "The page you're looking for doesn't exist.",
@@ -237,6 +255,15 @@ export const translations: Record<LanguageCode, Translations> = {
     saving: "सहेजा जा रहा है...",
     profileUpdated: "प्रोफ़ाइल अपडेट हो गई।",
     profileUpdateError: "आपके परिवर्तन सहेजे नहीं जा सके। कृपया पुनः प्रयास करें।",
+    changeEmailPasswordHeading: "ईमेल और पासवर्ड",
+    currentPasswordLabel: "वर्तमान पासवर्ड",
+    newPasswordLabel: "नया पासवर्ड",
+    newPasswordHint: "अपना वर्तमान पासवर्ड रखने के लिए इसे खाली छोड़ें।",
+    confirmNewPasswordLabel: "नए पासवर्ड की पुष्टि करें",
+    passwordsDontMatch: "पासवर्ड मेल नहीं खाते।",
+    updateCredentials: "ईमेल और पासवर्ड अपडेट करें",
+    updatingCredentials: "अपडेट हो रहा है...",
+    credentialsUpdated: "ईमेल और पासवर्ड अपडेट हो गए।",
 
     notFoundTitle: "पृष्ठ नहीं मिला",
     notFoundSubtitle: "आप जिस पृष्ठ की तलाश कर रहे हैं वह मौजूद नहीं है।",
@@ -314,6 +341,15 @@ export const translations: Record<LanguageCode, Translations> = {
     saving: "Guardando...",
     profileUpdated: "Perfil actualizado.",
     profileUpdateError: "No se pudieron guardar tus cambios. Inténtalo de nuevo.",
+    changeEmailPasswordHeading: "Correo y contraseña",
+    currentPasswordLabel: "Contraseña actual",
+    newPasswordLabel: "Nueva contraseña",
+    newPasswordHint: "Déjalo en blanco para mantener tu contraseña actual.",
+    confirmNewPasswordLabel: "Confirmar nueva contraseña",
+    passwordsDontMatch: "Las contraseñas no coinciden.",
+    updateCredentials: "Actualizar correo y contraseña",
+    updatingCredentials: "Actualizando...",
+    credentialsUpdated: "Correo y contraseña actualizados.",
 
     notFoundTitle: "Página no encontrada",
     notFoundSubtitle: "La página que buscas no existe.",
@@ -391,6 +427,15 @@ export const translations: Record<LanguageCode, Translations> = {
     saving: "Enregistrement...",
     profileUpdated: "Profil mis à jour.",
     profileUpdateError: "Impossible d'enregistrer vos modifications. Veuillez réessayer.",
+    changeEmailPasswordHeading: "E-mail et mot de passe",
+    currentPasswordLabel: "Mot de passe actuel",
+    newPasswordLabel: "Nouveau mot de passe",
+    newPasswordHint: "Laissez vide pour conserver votre mot de passe actuel.",
+    confirmNewPasswordLabel: "Confirmer le nouveau mot de passe",
+    passwordsDontMatch: "Les mots de passe ne correspondent pas.",
+    updateCredentials: "Mettre à jour l'e-mail et le mot de passe",
+    updatingCredentials: "Mise à jour...",
+    credentialsUpdated: "E-mail et mot de passe mis à jour.",
 
     notFoundTitle: "Page introuvable",
     notFoundSubtitle: "La page que vous recherchez n'existe pas.",
@@ -468,6 +513,15 @@ export const translations: Record<LanguageCode, Translations> = {
     saving: "Wird gespeichert...",
     profileUpdated: "Profil aktualisiert.",
     profileUpdateError: "Deine Änderungen konnten nicht gespeichert werden. Bitte versuche es erneut.",
+    changeEmailPasswordHeading: "E-Mail & Passwort",
+    currentPasswordLabel: "Aktuelles Passwort",
+    newPasswordLabel: "Neues Passwort",
+    newPasswordHint: "Leer lassen, um dein aktuelles Passwort beizubehalten.",
+    confirmNewPasswordLabel: "Neues Passwort bestätigen",
+    passwordsDontMatch: "Die Passwörter stimmen nicht überein.",
+    updateCredentials: "E-Mail & Passwort aktualisieren",
+    updatingCredentials: "Wird aktualisiert...",
+    credentialsUpdated: "E-Mail und Passwort aktualisiert.",
 
     notFoundTitle: "Seite nicht gefunden",
     notFoundSubtitle: "Die gesuchte Seite existiert nicht.",
@@ -545,6 +599,15 @@ export const translations: Record<LanguageCode, Translations> = {
     saving: "Salvando...",
     profileUpdated: "Perfil atualizado.",
     profileUpdateError: "Não foi possível salvar suas alterações. Tente novamente.",
+    changeEmailPasswordHeading: "E-mail e senha",
+    currentPasswordLabel: "Senha atual",
+    newPasswordLabel: "Nova senha",
+    newPasswordHint: "Deixe em branco para manter sua senha atual.",
+    confirmNewPasswordLabel: "Confirmar nova senha",
+    passwordsDontMatch: "As senhas não coincidem.",
+    updateCredentials: "Atualizar e-mail e senha",
+    updatingCredentials: "Atualizando...",
+    credentialsUpdated: "E-mail e senha atualizados.",
 
     notFoundTitle: "Página não encontrada",
     notFoundSubtitle: "A página que você procura não existe.",
@@ -621,6 +684,15 @@ export const translations: Record<LanguageCode, Translations> = {
     saving: "جارٍ الحفظ...",
     profileUpdated: "تم تحديث الملف الشخصي.",
     profileUpdateError: "تعذر حفظ تغييراتك. يرجى المحاولة مرة أخرى.",
+    changeEmailPasswordHeading: "البريد الإلكتروني وكلمة المرور",
+    currentPasswordLabel: "كلمة المرور الحالية",
+    newPasswordLabel: "كلمة المرور الجديدة",
+    newPasswordHint: "اتركه فارغًا للاحتفاظ بكلمة مرورك الحالية.",
+    confirmNewPasswordLabel: "تأكيد كلمة المرور الجديدة",
+    passwordsDontMatch: "كلمتا المرور غير متطابقتين.",
+    updateCredentials: "تحديث البريد الإلكتروني وكلمة المرور",
+    updatingCredentials: "جارٍ التحديث...",
+    credentialsUpdated: "تم تحديث البريد الإلكتروني وكلمة المرور.",
 
     notFoundTitle: "الصفحة غير موجودة",
     notFoundSubtitle: "الصفحة التي تبحث عنها غير موجودة.",
@@ -697,6 +769,15 @@ export const translations: Record<LanguageCode, Translations> = {
     saving: "正在保存...",
     profileUpdated: "个人资料已更新。",
     profileUpdateError: "无法保存您的更改，请重试。",
+    changeEmailPasswordHeading: "邮箱与密码",
+    currentPasswordLabel: "当前密码",
+    newPasswordLabel: "新密码",
+    newPasswordHint: "留空则保留当前密码。",
+    confirmNewPasswordLabel: "确认新密码",
+    passwordsDontMatch: "两次输入的密码不一致。",
+    updateCredentials: "更新邮箱与密码",
+    updatingCredentials: "正在更新...",
+    credentialsUpdated: "邮箱和密码已更新。",
 
     notFoundTitle: "未找到页面",
     notFoundSubtitle: "您要查找的页面不存在。",

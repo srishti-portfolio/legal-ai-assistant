@@ -6,13 +6,10 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { clearAuthCookie, setAuthCookie } from "../utils/authCookie.js";
 import { signToken } from "../utils/jwt.js";
 import { hashPassword, verifyPassword } from "../utils/password.js";
+import { toPublicUser } from "../utils/publicUser.js";
 import { loginSchema, registerSchema } from "../validators/auth.js";
 
 export const authRouter = Router();
-
-function toPublicUser(user: { id: string; name: string; email: string; language: string }) {
-  return { id: user.id, name: user.name, email: user.email, language: user.language };
-}
 
 authRouter.post(
   "/register",

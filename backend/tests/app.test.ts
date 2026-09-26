@@ -32,6 +32,10 @@ describe("authentication is required for protected routes", () => {
     expect((await request(app).get("/api/user/profile")).status).toBe(401);
   });
 
+  it("PATCH /api/user/credentials returns 401 without a token", async () => {
+    expect((await request(app).patch("/api/user/credentials")).status).toBe(401);
+  });
+
   it("POST /api/chat/ask returns 401 without a token", async () => {
     expect((await request(app).post("/api/chat/ask")).status).toBe(401);
   });

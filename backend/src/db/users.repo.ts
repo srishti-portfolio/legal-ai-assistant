@@ -34,3 +34,14 @@ export async function updateUserProfile(
   );
   return rows[0] ?? null;
 }
+
+export async function updateUserCredentials(
+  id: string,
+  updates: { email?: string; passwordHash?: string },
+): Promise<User | null> {
+  const { rows } = await pool.query<User>(
+    `UPDATE users SET email = COALESCE($2, email), password_hash = COALESCE($3, password_hash) WHERE id = $1 RETURNING *`,
+    [id, updates.email ?? null, updates.passwordHash ?? null],
+  );
+  return rows[0] ?? null;
+}

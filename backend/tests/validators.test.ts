@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loginSchema, registerSchema } from "../src/validators/auth.js";
-import { askQuestionSchema, updateProfileSchema } from "../src/validators/chat.js";
+import { askQuestionSchema } from "../src/validators/chat.js";
+import { updateCredentialsSchema, updateProfileSchema } from "../src/validators/user.js";
 
 describe("registerSchema", () => {
   it("accepts a valid registration payload", () => {
@@ -54,5 +55,31 @@ describe("updateProfileSchema", () => {
 
   it("allows partial updates", () => {
     expect(updateProfileSchema.parse({ name: "New Name" })).toEqual({ name: "New Name" });
+  });
+});
+
+describe("updateCredentialsSchema", () => {
+  const currentPassword = "correct-horse-1";
+
+  it("requires the current password", () => {
+    expect(() => updateCredentialsSchema.parse({ email: "new@example.com" })).toThrow();
+  });
+
+  it("rejects a payload with neither a new email nor a new password", () => {
+    expect(() => updateCredentialsSchema.parse({ currentPassword })).toThrow();
+  });
+
+  it("accepts an email-only change", () => {
+    const result = updateCredentialsSchema.parse({ currentPassword, email: "New@Example.com" });
+    expect(result.email).toBe("new@example.com"); // normalized to lowercase
+  });
+
+  it("accepts a password-only change", () => {
+    const result = updateCredentialsSchema.parse({ currentPassword, newPassword: "newpassword1" });
+    expect(result.newPassword).toBe("newpassword1");
+  });
+
+  it("rejects a new password that fails the complexity rules", () => {
+    expect(() => updateCredentialsSchema.parse({ currentPassword, newPassword: "onlyletters" })).toThrow();
   });
 });
